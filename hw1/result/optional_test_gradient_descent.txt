@@ -1,0 +1,3 @@
+field: sqft_living bedrooms
+parameter: 314.850313128 -53259.4365714 65820.3477367
+rmse: 259160.225833

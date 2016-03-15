@@ -1,0 +1,3 @@
+field: sqft_living
+parameter: 283.842756081 -49800.4067503
+rmse: 264054.500698
