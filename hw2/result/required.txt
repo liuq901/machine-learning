@@ -1,0 +1,2 @@
+removed: is_spam
+accuracy: 0.871666666667

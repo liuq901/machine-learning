@@ -1,0 +1,2 @@
+removed: word_freq_make is_spam
+accuracy: 0.875
