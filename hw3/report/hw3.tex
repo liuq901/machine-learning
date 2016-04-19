@@ -16,7 +16,10 @@
 The boundary is a hyperplane $w^Tx+b=0$. For any two points $x_1, x_2$ in this hyperplane, we have $w^Tx_1+b=0$ and $w^Tx_2+b=0$. This implies $w^T(x_2-x_1)=0$ which means $w$ is perpendicular to the vector $\overrightarrow{x_1x_2}$. Due to $x_1$ and $x_2$ can be chosen arbitrarily, $w$ is perpendicular to any vector in the hyperplane. Thus $w$ is perpendicular to the hyperplane which is the boundary.
 
 \subsection{Support Vectors}
-Due to $x$ is the support vector of the positive class, we have $w^Tx+b=1$, then $b=1-w^Tx$. By the same method, $b=-1-w^Ty$ if $y$ is the support vector of the negative class.
+Due to $x$ is the support vector of the positive class and $y$ is the support vector of the negative class, we have
+\begin{align*}
+(w^Tx+b)+(w^Ty+b)&=0 \\ w^T(x+y)&=-2b \\ b&=-w^T(x+y)/2
+\end{align*}
 
 \subsection{Linear Boundary}
 \begin{center}
@@ -28,7 +31,7 @@ The boundary is shown as the yellow line in the above figure. The two support ve
 \begin{center}
 \includegraphics[width=0.5\textwidth]{../result/circular_boundary.jpg}
 \end{center}
-The boundary is shown as the yellow circle in the above figure. We use the transform $\phi(x)=|x|$ thus kernel is $K(x,x')=|x||x'|$. For all positive samples, $\phi(x)=3$. For all negative samples, $\phi(x)=1$. Therefore the boundary is $\phi(x)=2$ which is just the yellow circle.
+The boundary is shown as the yellow circle in the above figure. We use the transform $\phi(x)=||x||$ thus kernel is $K(x,x')=||x||\cdot||x'||$. For all positive samples, $\phi(x)=3$. For all negative samples, $\phi(x)=1$. Therefore the boundary is $\phi(x)=2$ which is just the yellow circle.
 
 \section{Soft Margin SVM}
 
@@ -76,7 +79,7 @@ The objective function is
 &\quad-\sum_{i=1}^m\sum_{j=1}^m\alpha_i\alpha_jy^{(i)} y^{(j)}(x^{(i)})^T x^{(j)}-\sum_{i=1}^m(\alpha_iy^{(i)}b-\alpha_i+\frac{a_i^2}{C}) \\
 &=\sum_{i=1}^m\alpha_i-\frac{1}{2}\sum_{i=1}^m\sum_{j=1}^m\alpha_i \alpha_jy^{(i)}y^{(j)}(x^{(i)})^Tx^{(j)}- \frac{1}{2C}\sum_{i=1}^m\alpha_i^2
 \end{align*}
-Therefore the dual problem is $$\max_\alpha \sum_{i=1}^m\alpha_i-\frac{1}{2}\sum_{i=1}^m\sum_{j=1}^m\alpha_i \alpha_jy^{(i)}y^{(j)}(x^{(i)})^Tx^{(j)}- \frac{1}{2C}\sum_{i=1}^m\alpha_i^2$$ with the constraint $$\forall i,\alpha_i\ge0$$ and $$\sum_{i=1}^m\alpha_iy^{(i)}=0.$$
+Therefore the dual problem is $$\max_\alpha \sum_{i=1}^m\alpha_i-\frac{1}{2}\sum_{i=1}^m\sum_{j=1}^m\alpha_i \alpha_jy^{(i)}y^{(j)}(x^{(i)})^Tx^{(j)}- \frac{1}{2C}\sum_{i=1}^m\alpha_i^2$$ with the constraints $$\forall i,\alpha_i\ge0$$ and $$\sum_{i=1}^m\alpha_iy^{(i)}=0.$$
 
 \section{Spam Email Filter}
 We use a Python library based on LibSVM to do the spam email filter. Three kernel functions are used and all the results are shown below. We did not show all the parameters because there are too many.
