@@ -14,10 +14,13 @@ def training(model_name):
 
 def testing(prefix, classifier):
     feature, label, name = data.get_matrix('test', False)
+    predict = classifier.predict(feature)
     res_file = open(prefix + '.txt', 'w')
     res_file.write(str(classifier.score(feature, label) * 100.0) + '\n')
+    for i in xrange(4):
+        res_file.write(' '.join(map(str, (np.logical_and(label == i, predict == j).sum() for j in xrange(4)))) + '\n')
     res_file.write('predict label name\n')
-    for x in zip(classifier.predict(feature), label, name):
+    for x in zip(predict, label, name):
         res_file.write(' '.join(map(str, x)) + '\n')
     res_file.close()
 

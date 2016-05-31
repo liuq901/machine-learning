@@ -1,4 +1,8 @@
 87.5
+8 2 0 0
+1 8 1 0
+0 0 10 0
+1 0 0 9
 predict label name
 0.0 0.0 bang1
 0.0 0.0 bao1
