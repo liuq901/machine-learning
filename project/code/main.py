@@ -7,15 +7,22 @@ random.seed(19930131)
 np.random.seed(19930131)
 
 def training(model_name):
-    feature, label = data.get_matrix('train')
+    feature, label, _ = data.get_matrix('train', True)
     classifier = model.get_model(model_name)
     classifier.fit(feature, label)
     return classifier
 
-def testing(classifier):
-    feature, label = data.get_matrix('test')
-    return classifier.score(feature, label) * 100.0
+def testing(prefix, classifier):
+    feature, label, name = data.get_matrix('test', False)
+    res_file = open(prefix + '.txt', 'w')
+    res_file.write(str(classifier.score(feature, label) * 100.0) + '\n')
+    res_file.write('predict label name\n')
+    for x in zip(classifier.predict(feature), label, name):
+        res_file.write(' '.join(map(str, x)) + '\n')
+    res_file.close()
 
-for model_name in ('logistic regression', 'naive bayes', 'decision tree', 'SVM'):
-    classifier = training(model_name)
-    print model_name, testing(classifier)
+for length in (20, 15, 10, 5):
+    data.set_feature_length(length)
+    for model_name in ('logistic_regression', 'naive_bayes', 'decision_tree', 'SVM'):
+        classifier = training(model_name)
+        testing('result/' + model_name + '_' + str(length), classifier)

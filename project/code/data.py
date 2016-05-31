@@ -2,7 +2,11 @@ import numpy as np
 import os
 import random
 
-feature_length = 20
+feature_length = None
+
+def set_feature_length(x):
+    global feature_length
+    feature_length = x
 
 def read_file(file_name):
     tmp = []
@@ -50,14 +54,17 @@ def extract(data, index):
         res[i] = data[index[i]]
     return res
 
-def get_matrix(dataset):
+def get_matrix(dataset, shuffle):
     data = get_data(dataset)
-    random.shuffle(data)
+    if shuffle:
+        random.shuffle(data)
     feature = np.ndarray(shape = (len(data), feature_length * 2))
     label = np.ndarray(shape = len(data))
+    name = []
     for i in xrange(len(data)):
         index = get_index(data[i]['f0'])
         feature[i][0:feature_length] = extract(data[i]['engy'], index)
         feature[i][feature_length:] = extract(data[i]['f0'], index)
         label[i] = data[i]['label']
-    return feature, label
+        name.append(data[i]['name'])
+    return feature, label, name

@@ -4,11 +4,11 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
 
 def get_model(name):
-    if name == 'logistic regression':
+    if name == 'logistic_regression':
         return LogisticRegression()
-    elif name == 'naive bayes':
+    elif name == 'naive_bayes':
         return GaussianNB()
-    elif name == 'decision tree':
+    elif name == 'decision_tree':
         return DecisionTreeClassifier()
     elif name == 'SVM':
         return SVC(kernel = 'poly')
